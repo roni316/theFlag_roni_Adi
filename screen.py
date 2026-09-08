@@ -7,6 +7,7 @@ WINDOW_HEIGHT = BOARD_ROWS * CELL_SIZE
 #This page consts
 BACKGROUND_COLOR = (138, 201, 38)
 
+
 import pygame
 pygame.init()
 
