@@ -28,10 +28,6 @@ def handle_user_events():
         elif state["state"] != consts.RUNNING_STATE:
             continue
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                night_vision()
-
         if event.key == pygame.K_LEFT:
             soldier.move_soldier_left()
 
@@ -47,5 +43,12 @@ def handle_user_events():
 
 
 
+pygame.init()
 def night_vision():
-    pass
+
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_KP_ENTER:
+                print("c")
+                return True
+    return False

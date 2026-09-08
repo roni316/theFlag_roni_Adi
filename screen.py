@@ -1,7 +1,10 @@
+import clock
 import pygame
 import consts
 import random
 import game_field
+import main
+import time
 
 def create_regular_screen():
     window.fill(consts.BACKGROUND_COLOR)
@@ -25,15 +28,20 @@ def get_random_location():
 pygame.init()
 
 def create_night_screen():
+    window.fill("black")
     create_grid()
-    for i in range(len(game_field.board)):
-        for j in range(len(game_field.board[i])):
-            if game_field.board[i][j] == "MINE":
+    board = game_field.final_board()
+    count = 0
+    print(board)
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == consts.MINE_BOX:
                 mine = pygame.transform.scale(consts.MINE, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
                 window.blit(mine, (j * consts.CELL_SIZE, i * consts.CELL_SIZE))
-            if game_field.board[i][j] == "SOLIDER":
-                solider = pygame.transform.scale(consts.SOLIDER, (consts.SOLIDER_WIDTH, consts.SOLIDER_HEIGHT))
-                window.blit(solider, (j * consts.CELL_SIZE, i * consts.CELL_SIZE))
+            if board[i][j] == consts.SOLIDER_BOX and count == 0:
+                count = 1
+                night_solider = pygame.transform.scale(consts.SOLIDER_NIGHT, (consts.SOLIDER_WIDTH, consts.SOLIDER_HEIGHT))
+                window.blit(night_solider, (j * consts.CELL_SIZE, i * consts.CELL_SIZE))
 
 def create_grid():
     blockSize = 20
@@ -42,16 +50,27 @@ def create_grid():
             rect = pygame.Rect(x, y, blockSize, blockSize)
             pygame.draw.rect(window, "dark green", rect, 1)
 
+def night_vision():
+    print("night_vision")
+    create_night_screen()
+    pygame.display.flip()
+
 window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Adi and Roni")
 run = True
-create_night_screen()
-# create_regular_screen()
+create_regular_screen()
 pygame.display.flip()
+count = 0
 while run:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN and count == 0:
+                night_vision()
+                count += 1
+            if event.type == pygame.QUIT:
+                run = False
 pygame.quit()
+
+
 
 
