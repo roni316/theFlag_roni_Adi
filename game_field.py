@@ -10,7 +10,6 @@ def initialize_board():
     board =  [[EMPTY_BOX for col in range(consts.BOARD_COLS)] for row in
             range(consts.BOARD_ROWS)]
 
-
 def random_mines():
     for i in range(consts.MINES_COUNT):
         x = random.randrange(consts.BOARD_ROWS)
@@ -29,6 +28,16 @@ def init_flag():
     return board
 
 
+def init_soldier(board):
+    for i in range(SOLDIER_ROWS):
+        for j in range(SOLDIER_COLS):
+            board[i][j] = SOLIDER_BOX
 
 
-initialize_board()
+def final_board():
+    initialize_board()
+    random_mines()
+    init_flag()
+    init_soldier(board)
+    return board
+
