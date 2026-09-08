@@ -47,6 +47,3 @@ def final_board():
     return board
 
 
-board = final_board()
-for i in board:
-    print(i)
