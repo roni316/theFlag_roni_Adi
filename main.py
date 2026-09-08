@@ -1,6 +1,6 @@
 import consts
 import pygame
-
+import soldier
 
 state = {
     "is_window_open": True,
@@ -33,20 +33,19 @@ def handle_user_events():
                 night_vision()
 
         if event.key == pygame.K_LEFT:
-            move_soldier()
+            soldier.move_soldier_left()
 
         if event.key == pygame.K_RIGHT:
-            move_soldier()
+            soldier.move_soldier_right()
 
         if event.key == pygame.K_UP:
-            move_soldier()
+            soldier.move_soldier_up()
 
         if event.key == pygame.K_DOWN:
-            move_soldier()
+            soldier.move_soldier_down()
 
 
-def move_soldier():
-    pass
+
 
 def night_vision():
     pass
