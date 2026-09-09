@@ -9,9 +9,6 @@ import soldier
 import main
 import time
 
-
-
-
 def lose():
     quit()
 
@@ -26,6 +23,15 @@ def find_solider_location():
     for i in range(len(board)):
         for j in range(len(board[i])):
             if board[i][j] == consts.SOLIDER_BODY_BOX:
+                des = (i,j)
+                return des
+    return None
+
+def find_mine_location():
+    print(board)
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            if board[i][j] == consts.MINE_BOX:
                 des = (i,j)
                 return des
     return None
@@ -59,9 +65,13 @@ def create_night_screen():
     print(board)
     for i in range(len(board)):
         for j in range(len(board[i])):
-            if board[i][j] == consts.MINE_BOX:
+            if board[i][j] == consts.MINE_BOX and j > 0 and board[i][j-1] == consts.EMPTY_BOX :
                 mine = pygame.transform.scale(consts.MINE, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
                 window.blit(mine, (j * consts.CELL_SIZE, i * consts.CELL_SIZE))
+            if j==0 and board[i][j] == consts.MINE_BOX:
+                mine = pygame.transform.scale(consts.MINE, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
+                window.blit(mine, (j * consts.CELL_SIZE, i * consts.CELL_SIZE))
+
             if board[i][j] == consts.SOLIDER_BODY_BOX and count == 0:
                 count = 1
                 night_solider = pygame.transform.scale(consts.SOLIDER_NIGHT, (consts.SOLIDER_WIDTH, consts.SOLIDER_HEIGHT))
@@ -91,17 +101,23 @@ run = True
 destination = get_random_location()
 create_regular_screen(destination)
 pygame.display.flip()
-count_row = 0
-count = 0
+count_row_down = 0
+count_enter = 0
+count_row_up = consts.BOARD_ROWS - 4
 while run:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN and count == 0:
+            if event.key == pygame.K_RETURN and count_enter == 0:
                 night_vision(destination)
-                count += 1
-            if event.key == pygame.K_DOWN and count_row < consts.BOARD_ROWS - 4:
-                count_row += 1
+                count_enter += 1
+            if event.key == pygame.K_DOWN and count_row_down < consts.BOARD_ROWS -4:
+                count_row_down += 1
                 board = soldier.move_soldier_down(board)
+                create_regular_screen(destination)
+                pygame.display.flip()
+            if event.key == pygame.K_UP and count_row_up > 0:
+                count_row_up -= 1
+                board = soldier.move_soldier_up()
                 create_regular_screen(destination)
                 pygame.display.flip()
             if event.type == pygame.QUIT:

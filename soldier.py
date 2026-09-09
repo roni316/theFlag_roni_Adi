@@ -84,6 +84,7 @@ def move_soldier_up(board):
 
 #moves the soldier down in the matrix
 def move_soldier_down(board):
+    count = 0
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
                 if board[row][col] == SOLIDER_FEET_BOX:
