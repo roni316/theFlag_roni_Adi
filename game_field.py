@@ -29,9 +29,13 @@ def init_flag():
 
 
 def init_soldier():
-    for i in range(SOLDIER_ROWS):
+    for i in range(SOLDIER_BODY_ROWS):
         for j in range(SOLDIER_COLS):
-            board[i][j] = SOLIDER_BOX
+            board[i][j] = SOLIDER_BODY_BOX
+
+    for i in range(SOLDIER_BODY_ROWS, (SOLDIER_BODY_ROWS + SOLDIER_FEET_ROWS)):
+        for j in range(SOLDIER_COLS):
+            board[i][j] = SOLIDER_FEET_BOX
 
 
 def final_board():
