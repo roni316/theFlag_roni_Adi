@@ -13,10 +13,12 @@ def random_mines():
     for i in range(consts.MINES_COUNT):
         x = random.randrange(consts.BOARD_ROWS)
         y = random.randrange(consts.BOARD_COLS-2)
-        while board[x][y] != EMPTY_BOX:
+        while board[x][y] != EMPTY_BOX and board[x][y + 1] != EMPTY_BOX and board[x][y + 2] != EMPTY_BOX :
             x = random.randrange(consts.BOARD_ROWS)
             y = random.randrange(consts.BOARD_COLS)
         board[x][y] = MINE_BOX
+        board[x][y + 1] = MINE_BOX
+        board[x][y + 2] = MINE_BOX
     return board
 
 def init_flag():
