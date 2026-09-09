@@ -3,12 +3,14 @@ import random
 
 from consts import *
 
-
+#initializes empty board
 def initialize_board():
     global board
     board =  [[EMPTY_BOX for col in range(consts.BOARD_COLS)] for row in
             range(consts.BOARD_ROWS)]
 
+#puts mines on the board randomly
+#for every 1 mine, the functions adds 3
 def random_mines():
     for i in range(consts.MINES_COUNT):
         x = random.randrange(consts.BOARD_ROWS)
