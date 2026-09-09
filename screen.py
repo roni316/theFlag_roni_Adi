@@ -27,7 +27,7 @@ def find_solider_location():
                 return des
     return None
 
-def create_regular_screen():
+def create_regular_screen(destination_grass):
     window.fill(consts.BACKGROUND_COLOR)
     solider = pygame.transform.scale(consts.SOLIDER, (consts.SOLIDER_WIDTH, consts.SOLIDER_HEIGHT))
     destination = find_solider_location()
@@ -35,9 +35,8 @@ def create_regular_screen():
     flag = pygame.transform.scale(consts.FLAG, (consts.FLAG_WIDTH, consts.FLAG_HEIGHT))
     window.blit(flag,( consts.FLAG_COL_DES * consts.CELL_SIZE, consts.FLAG_ROW_DES * consts.CELL_SIZE))
     grass = pygame.transform.scale(consts.GRASS, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
-    destination = get_random_location()
     for i in range(consts.MINES_COUNT):
-        window.blit(grass,(destination[i][1] * consts.CELL_SIZE, destination[i][0] * consts.CELL_SIZE))
+        window.blit(grass,(destination_grass[i][1] * consts.CELL_SIZE, destination_grass[i][0] * consts.CELL_SIZE))
 
 def get_random_location():
     location_list = []
@@ -73,30 +72,33 @@ def create_grid():
             rect = pygame.Rect(x, y, blockSize, blockSize)
             pygame.draw.rect(window, "dark green", rect, 1)
 
-def night_vision():
+def night_vision(grass_destination):
     run_end = pygame.time.get_ticks() + 1000
     create_night_screen()
     while pygame.time.get_ticks() < run_end:
         pygame.display.flip()
-    create_regular_screen()
+    create_regular_screen(grass_destination)
     pygame.display.flip()
 
 board = game_field.final_board()
 window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 pygame.display.set_caption("Adi and Roni")
 run = True
-create_regular_screen()
+destination = get_random_location()
+create_regular_screen(destination)
 pygame.display.flip()
+count_row = 0
 count = 0
 while run:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN and count == 0:
-                night_vision()
+                night_vision(destination)
                 count += 1
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN and count_row < consts.BOARD_ROWS - 4:
+                count_row += 1
                 board = soldier.move_soldier_down(board)
-                create_regular_screen()
+                create_regular_screen(destination)
                 pygame.display.flip()
             if event.type == pygame.QUIT:
                 run = False

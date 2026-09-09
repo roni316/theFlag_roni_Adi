@@ -75,23 +75,23 @@ def move_soldier_up():
 
 #moves the soldier down in the matrix
 def move_soldier_down(board):
-    for row in range(len(board)):
+    for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
-            if board[row][col] == SOLIDER_FEET_BOX:
-                if board[row + 1][col] == EMPTY_BOX:
-                    board[row][col] = EMPTY_BOX
-                    if row + 1 < len(board):
+                if board[row][col] == SOLIDER_FEET_BOX:
+                    print("s")
+                    if board[row + 1][col] == EMPTY_BOX :
+                        board[row][col] = EMPTY_BOX
                         board[row + 1][col] = SOLIDER_FEET_BOX
-                else:
                     if board[row + 1][col] == MINE_BOX:
                         screen.lose()
 
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
-            if board[row][col] == SOLIDER_BODY_BOX:
+            if board[row][col] == SOLIDER_BODY_BOX :
                 board[row][col] = EMPTY_BOX
-                if row + 1 < len(board):
-                    board[row + 1][col] = SOLIDER_BODY_BOX
+                board[row + 1][col] = SOLIDER_BODY_BOX
+    for i in board:
+        print(i)
     return board
 
 

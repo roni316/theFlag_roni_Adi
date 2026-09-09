@@ -1,5 +1,7 @@
 import consts
 import pygame
+
+import screen
 import soldier
 
 state = {
@@ -11,7 +13,6 @@ state = {
 
 def main():
     while state["is_window_open"]:
-
         handle_user_events()
 
 
