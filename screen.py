@@ -52,7 +52,12 @@ def create_grid():
 
 def night_vision():
     print("night_vision")
+    run_end = pygame.time.get_ticks() + 1000
+    print(run_end)
     create_night_screen()
+    while pygame.time.get_ticks() < run_end:
+        pygame.display.flip()
+    create_regular_screen()
     pygame.display.flip()
 
 window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))

@@ -44,11 +44,3 @@ def handle_user_events():
 
 
 pygame.init()
-def night_vision():
-
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_KP_ENTER:
-                print("c")
-                return True
-    return False
