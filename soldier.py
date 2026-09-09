@@ -78,11 +78,12 @@ def move_soldier_up(board):
     for row in range(len(board)):
         for col in range(len(board[row])):
             if board[row][col] == SOLIDER_BODY_BOX:
-                if board[row - 1][col] == EMPTY_BOX:
-                    board[row][col] = EMPTY_BOX
-                    board[row - 1][col] = SOLIDER_BODY_BOX
-                if board[row - 1][col] == FLAG_BOX:
-                    screen.win()
+                if is_valid_move(row -1, col):
+                    if board[row - 1][col] == EMPTY_BOX:
+                        board[row][col] = EMPTY_BOX
+                        board[row - 1][col] = SOLIDER_BODY_BOX
+                    if board[row - 1][col] == FLAG_BOX:
+                        screen.win()
 
     for row in range(len(board)):
         for col in range(len(board[row])):
@@ -101,10 +102,8 @@ def move_soldier_up(board):
 def move_soldier_down(board):
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
-            print(is_valid_move(row, col))
-            if is_valid_move(row + 1, col):
-                board[row][col] = SOLIDER_BODY_BOX
-                if board[row][col] == SOLIDER_FEET_BOX:
+            if board[row][col] == SOLIDER_FEET_BOX:
+                if is_valid_move(row + 1, col):
                     if board[row + 1][col] == EMPTY_BOX :
                         board[row][col] = EMPTY_BOX
                         board[row + 1][col] = SOLIDER_FEET_BOX
@@ -125,7 +124,7 @@ def move_soldier_down(board):
     return board
 
 def is_valid_move(row, col):
-    if row < 0 or row + SOLDIER_ROWS > BOARD_ROWS:
+    if row < 0 or row > BOARD_ROWS - 1:
         return False
     if col < 0 or col + SOLDIER_COLS > BOARD_COLS:
         return False
