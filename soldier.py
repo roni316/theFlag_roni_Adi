@@ -78,7 +78,6 @@ def move_soldier_down(board):
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
                 if board[row][col] == SOLIDER_FEET_BOX:
-                    print("s")
                     if board[row + 1][col] == EMPTY_BOX :
                         board[row][col] = EMPTY_BOX
                         board[row + 1][col] = SOLIDER_FEET_BOX
@@ -88,8 +87,12 @@ def move_soldier_down(board):
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
             if board[row][col] == SOLIDER_BODY_BOX :
-                board[row][col] = EMPTY_BOX
-                board[row + 1][col] = SOLIDER_BODY_BOX
+                if board[row + 1][col] == EMPTY_BOX:
+                    board[row][col] = EMPTY_BOX
+                    board[row + 1][col] = SOLIDER_BODY_BOX
+                if board[row + 1][col] == FLAG_BOX:
+                    screen.win()
+
     for i in board:
         print(i)
     return board

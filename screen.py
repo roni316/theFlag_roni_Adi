@@ -11,7 +11,8 @@ import time
 
 
 def lose():
-    pass
+    quit()
+
 
 
 def win():
