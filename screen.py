@@ -117,7 +117,7 @@ while run:
                 pygame.display.flip()
             if event.key == pygame.K_UP and count_row_up > 0:
                 count_row_up -= 1
-                board = soldier.move_soldier_up()
+                board = soldier.move_soldier_up(board)
                 create_regular_screen(destination)
                 pygame.display.flip()
             if event.type == pygame.QUIT:
