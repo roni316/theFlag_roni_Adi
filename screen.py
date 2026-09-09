@@ -15,9 +15,9 @@ def lose():
 
 
 def win():
-    pass
+    quit()
 
-
+#finds the soldier location in the matrix
 def find_solider_location():
     print(board)
     for i in range(len(board)):
@@ -27,6 +27,7 @@ def find_solider_location():
                 return des
     return None
 
+#finds the mines location in the matrix
 def find_mine_location():
     print(board)
     for i in range(len(board)):
@@ -36,6 +37,8 @@ def find_mine_location():
                 return des
     return None
 
+#creates regular screen
+#initiates the bushes
 def create_regular_screen(destination_grass):
     window.fill(consts.BACKGROUND_COLOR)
     solider = pygame.transform.scale(consts.SOLIDER, (consts.SOLIDER_WIDTH, consts.SOLIDER_HEIGHT))
@@ -47,6 +50,7 @@ def create_regular_screen(destination_grass):
     for i in range(consts.MINES_COUNT):
         window.blit(grass,(destination_grass[i][1] * consts.CELL_SIZE, destination_grass[i][0] * consts.CELL_SIZE))
 
+#returns a list of random locations the bushes need to be placed at
 def get_random_location():
     location_list = []
     row = random.sample(range(1,consts.BOARD_ROWS-1), consts.MINES_COUNT)
@@ -57,6 +61,7 @@ def get_random_location():
     return location_list
 pygame.init()
 
+#creates the night screen
 def create_night_screen():
     window.fill("black")
     create_grid()
@@ -78,6 +83,8 @@ def create_night_screen():
                 destination = find_solider_location()
                 window.blit(night_solider, (destination[1] * consts.CELL_SIZE, destination[0] * consts.CELL_SIZE))
 
+
+#creates the game grid
 def create_grid():
     blockSize = 20
     for x in range(0, consts.WINDOW_WIDTH, blockSize):
@@ -85,7 +92,7 @@ def create_grid():
             rect = pygame.Rect(x, y, blockSize, blockSize)
             pygame.draw.rect(window, "dark green", rect, 1)
 
-''' the function creates '''
+# displays the night screen for one second
 def night_vision(grass_destination):
     run_end = pygame.time.get_ticks() + 1000
     create_night_screen()
@@ -93,6 +100,9 @@ def night_vision(grass_destination):
         pygame.display.flip()
     create_regular_screen(grass_destination)
     pygame.display.flip()
+
+
+#the official game loop:
 
 board = game_field.final_board()
 window = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
