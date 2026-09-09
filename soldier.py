@@ -78,9 +78,13 @@ def move_soldier_down(board):
     for row in range(len(board)):
         for col in range(len(board[row])):
             if board[row][col] == SOLIDER_FEET_BOX:
-                board[row][col] = EMPTY_BOX
-                if row + 1 < len(board):
-                    board[row + 1][col] = SOLIDER_FEET_BOX
+                if board[row + 1][col] == EMPTY_BOX:
+                    board[row][col] = EMPTY_BOX
+                    if row + 1 < len(board):
+                        board[row + 1][col] = SOLIDER_FEET_BOX
+                else:
+                    if board[row + 1][col] == MINE_BOX:
+                        lose()
 
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
@@ -90,3 +94,10 @@ def move_soldier_down(board):
                     board[row + 1][col] = SOLIDER_BODY_BOX
     return board
 
+
+def lose():
+    pass
+
+
+def win():
+    pass
