@@ -133,3 +133,4 @@ def is_valid_move(row, col):
     return True
 
 
+#אם היה לנו עוד זמן היינו מפצלות את הקוד ליותר פונקציות
