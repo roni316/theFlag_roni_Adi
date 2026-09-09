@@ -101,22 +101,18 @@ run = True
 destination = get_random_location()
 create_regular_screen(destination)
 pygame.display.flip()
-count_row_down = 0
 count_enter = 0
-count_row_up = consts.BOARD_ROWS - 4
 while run:
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN and count_enter == 0:
                 night_vision(destination)
                 count_enter += 1
-            if event.key == pygame.K_DOWN and count_row_down < consts.BOARD_ROWS -4:
-                count_row_down += 1
+            if event.key == pygame.K_DOWN:
                 board = soldier.move_soldier_down(board)
                 create_regular_screen(destination)
                 pygame.display.flip()
-            if event.key == pygame.K_UP and count_row_up > 0:
-                count_row_up -= 1
+            if event.key == pygame.K_UP:
                 board = soldier.move_soldier_up(board)
                 create_regular_screen(destination)
                 pygame.display.flip()

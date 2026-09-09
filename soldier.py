@@ -99,9 +99,11 @@ def move_soldier_up(board):
 
 #moves the soldier down in the matrix
 def move_soldier_down(board):
-    count = 0
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
+            print(is_valid_move(row, col))
+            if is_valid_move(row + 1, col):
+                board[row][col] = SOLIDER_BODY_BOX
                 if board[row][col] == SOLIDER_FEET_BOX:
                     if board[row + 1][col] == EMPTY_BOX :
                         board[row][col] = EMPTY_BOX
@@ -121,5 +123,12 @@ def move_soldier_down(board):
     for i in board:
         print(i)
     return board
+
+def is_valid_move(row, col):
+    if row < 0 or row + SOLDIER_ROWS > BOARD_ROWS:
+        return False
+    if col < 0 or col + SOLDIER_COLS > BOARD_COLS:
+        return False
+    return True
 
 
