@@ -55,20 +55,22 @@ def move_soldier_right(board):
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
             if board[row][col] == SOLIDER_FEET_BOX:
-                if board[row][col + 1] == EMPTY_BOX:
-                    board[row][col] = EMPTY_BOX
-                    board[row][col + 1] = SOLIDER_FEET_BOX
-                if board[row][col + 1] == MINE_BOX:
-                    screen.lose()
+                if is_valid_move(row, col + 1):
+                    if board[row][col + 1] == EMPTY_BOX:
+                        board[row][col] = EMPTY_BOX
+                        board[row][col + 1] = SOLIDER_FEET_BOX
+                    if board[row][col + 1] == MINE_BOX:
+                        screen.lose()
 
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
             if board[row][col] == SOLIDER_BODY_BOX:
-                if board[row][col + 1] == EMPTY_BOX:
-                    board[row][col] = EMPTY_BOX
-                    board[row][col + 1] = SOLIDER_FEET_BOX
-                if board[row][col + 1] == MINE_BOX:
-                    screen.lose()
+                if is_valid_move(row, col + 1):
+                    if board[row][col + 1] == EMPTY_BOX:
+                        board[row][col] = EMPTY_BOX
+                        board[row][col + 1] = SOLIDER_FEET_BOX
+                    if board[row][col + 1] == MINE_BOX:
+                        screen.lose()
     for i in board:
         print(i)
     return board
