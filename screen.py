@@ -1,5 +1,7 @@
 import clock
 import pygame
+from fontTools.tfmLib import PASSTHROUGH
+
 import consts
 import random
 import game_field
@@ -73,6 +75,7 @@ def create_grid():
             rect = pygame.Rect(x, y, blockSize, blockSize)
             pygame.draw.rect(window, "dark green", rect, 1)
 
+''' the function creates '''
 def night_vision(grass_destination):
     run_end = pygame.time.get_ticks() + 1000
     create_night_screen()

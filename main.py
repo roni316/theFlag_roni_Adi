@@ -26,15 +26,15 @@ def handle_user_events():
         elif state["state"] != consts.RUNNING_STATE:
             continue
 
-        # if event.key == pygame.K_LEFT:
-        #     soldier.move_soldier_left()
-        #
-        # if event.key == pygame.K_RIGHT:
-        #     soldier.move_soldier_right()
-        #
-        # if event.key == pygame.K_UP:
-        #     soldier.move_soldier_up()
-        #
+        if event.key == pygame.K_LEFT:
+            soldier.move_soldier_left()
+
+        if event.key == pygame.K_RIGHT:
+            soldier.move_soldier_right()
+
+        if event.key == pygame.K_UP:
+            soldier.move_soldier_up()
+
         # if event.key == pygame.K_DOWN:
         #     soldier.move_soldier_down()
 
