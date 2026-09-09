@@ -6,7 +6,6 @@ from consts import *
 
 def initialize_board():
     global board
-
     board =  [[EMPTY_BOX for col in range(consts.BOARD_COLS)] for row in
             range(consts.BOARD_ROWS)]
 
