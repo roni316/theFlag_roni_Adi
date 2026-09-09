@@ -120,6 +120,10 @@ while run:
                 board = soldier.move_soldier_right(board)
                 create_regular_screen(destination)
                 pygame.display.flip()
+            if event.key == pygame.K_LEFT:
+                board = soldier.move_soldier_left(board)
+                create_regular_screen(destination)
+                pygame.display.flip()
             if event.type == pygame.QUIT:
                 run = False
 pygame.quit()
