@@ -96,7 +96,7 @@ while run:
                 count += 1
             if event.key == pygame.K_DOWN:
                 board = soldier.move_soldier_down(board)
-                print(board)
+                create_regular_screen()
                 pygame.display.flip()
             if event.type == pygame.QUIT:
                 run = False
