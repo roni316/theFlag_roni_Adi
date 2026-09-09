@@ -7,6 +7,17 @@ import soldier
 import main
 import time
 
+
+
+
+def lose():
+    pass
+
+
+def win():
+    pass
+
+
 def find_solider_location():
     print(board)
     for i in range(len(board)):

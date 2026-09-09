@@ -1,5 +1,5 @@
 import game_field
-
+import screen
 from consts import *
 
 def find_feet():
@@ -84,7 +84,7 @@ def move_soldier_down(board):
                         board[row + 1][col] = SOLIDER_FEET_BOX
                 else:
                     if board[row + 1][col] == MINE_BOX:
-                        lose()
+                        screen.lose()
 
     for row in range(len(board))[::-1]:
         for col in range(len(board[row])):
@@ -95,9 +95,3 @@ def move_soldier_down(board):
     return board
 
 
-def lose():
-    pass
-
-
-def win():
-    pass
